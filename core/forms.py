@@ -15,3 +15,8 @@ class SupplierForm(forms.ModelForm):
     class Meta:
         model = Supplier
         fields = ['name','phone','address']
+
+class CustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['name','phone','address']
