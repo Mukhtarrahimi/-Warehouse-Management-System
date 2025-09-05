@@ -25,3 +25,8 @@ class StockInForm(forms.ModelForm):
     class Meta:
         model = StockIn
         fields = ['product','supplier','quantity','unit_cost','note']
+
+class StockOutForm(forms.ModelForm):
+    class Meta:
+        model = StockOut
+        fields = ['product','customer','quantity','unit_price','note']
