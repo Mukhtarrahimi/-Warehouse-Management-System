@@ -59,3 +59,30 @@ class StockIn(models.Model):
                 p.avg_cost = (total_cost / new_stock) if new_stock > 0 else 0
                 p.purchase_price = new_cost
                 p.save()
+
+class StockOut(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='stockouts')
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
+    quantity = models.PositiveIntegerField()
+    unit_price = models.DecimalField(max_digits=12, decimal_places=2)
+    cost_basis = models.DecimalField(max_digits=12, decimal_places=4, editable=False, default=0)
+    date = models.DateField(auto_now_add=True)
+    note = models.CharField(max_length=200, blank=True)
+
+    def save(self, *args, **kwargs):
+        with transaction.atomic():
+            creating = self._state.adding
+            if creating:
+                # snapshot current avg_cost before changing stock
+                self.cost_basis = self.product.avg_cost
+            super().save(*args, **kwargs)
+            if creating:
+                p = self.product
+                if self.quantity > p.stock:
+                    raise ValueError("Insufficient stock")
+                p.stock = p.stock - self.quantity
+                p.save()
+
+    @property
+    def profit(self):
+        return (self.unit_price - self.cost_basis) * self.quantity
