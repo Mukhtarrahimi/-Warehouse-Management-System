@@ -20,3 +20,8 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ['name','phone','address']
+    
+class StockInForm(forms.ModelForm):
+    class Meta:
+        model = StockIn
+        fields = ['product','supplier','quantity','unit_cost','note']
