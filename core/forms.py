@@ -10,3 +10,8 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name','code','category','purchase_price','sale_price','low_stock_threshold']
+
+class SupplierForm(forms.ModelForm):
+    class Meta:
+        model = Supplier
+        fields = ['name','phone','address']
