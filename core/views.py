@@ -9,3 +9,7 @@ def login_view(request):
         login(request, user)
         return redirect('dashboard')
     return render(request, 'auth/login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
