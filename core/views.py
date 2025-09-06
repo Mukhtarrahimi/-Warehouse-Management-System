@@ -44,3 +44,12 @@ def product_list(request):
     if q:
         products = products.filter(name__icontains=q) | products.filter(code__icontains=q) | products.filter(category__icontains=q)
     return render(request, 'products/list.html', {'products': products, 'q': q})
+
+@login_required
+@admin_required
+def product_create(request):
+    form = ProductForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('product_list')
+    return render(request, 'products/form.html', {'form': form, 'title':'Create Product'})
