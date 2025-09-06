@@ -53,3 +53,15 @@ def product_create(request):
         form.save()
         return redirect('product_list')
     return render(request, 'products/form.html', {'form': form, 'title':'Create Product'})
+
+@login_required
+def product_edit(request, pk):
+    obj = get_object_or_404(Product, pk=pk)
+    if not (request.user.is_superuser or request.user.role == 'ADMIN'):
+        # allow staff to only view stock? keep edit for admins
+        return redirect('product_list')
+    form = ProductForm(request.POST or None, instance=obj)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('product_list')
+    return render(request, 'products/form.html', {'form': form, 'title':'Edit Product'})
