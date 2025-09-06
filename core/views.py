@@ -65,3 +65,12 @@ def product_edit(request, pk):
         form.save()
         return redirect('product_list')
     return render(request, 'products/form.html', {'form': form, 'title':'Edit Product'})
+
+@login_required
+@admin_required
+def product_delete(request, pk):
+    obj = get_object_or_404(Product, pk=pk)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('product_list')
+    return render(request, 'confirm_delete.html', {'obj': obj, 'cancel_url':'product_list'})
