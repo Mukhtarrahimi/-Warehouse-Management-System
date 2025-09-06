@@ -34,3 +34,13 @@ def dashboard(request):
         'today_profit': today_sales.get('profit') or 0,
     }
     return render(request, 'dashboard.html', context)
+
+
+# Products
+@login_required
+def product_list(request):
+    q = request.GET.get('q','')
+    products = Product.objects.all()
+    if q:
+        products = products.filter(name__icontains=q) | products.filter(code__icontains=q) | products.filter(category__icontains=q)
+    return render(request, 'products/list.html', {'products': products, 'q': q})
