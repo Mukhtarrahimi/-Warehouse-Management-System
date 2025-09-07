@@ -132,3 +132,11 @@ def customer_edit(request, pk):
     if request.method == 'POST' and form.is_valid():
         form.save(); return redirect('customer_list')
     return render(request, 'customers/form.html', {'form': form, 'title':'Edit Customer'})
+
+@login_required
+@admin_required
+def customer_delete(request, pk):
+    obj = get_object_or_404(Customer, pk=pk)
+    if request.method == 'POST':
+        obj.delete(); return redirect('customer_list')
+    return render(request, 'confirm_delete.html', {'obj': obj, 'cancel_url':'customer_list'})
