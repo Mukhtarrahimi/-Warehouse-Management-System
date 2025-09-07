@@ -123,3 +123,12 @@ def customer_create(request):
     if request.method == 'POST' and form.is_valid():
         form.save(); return redirect('customer_list')
     return render(request, 'customers/form.html', {'form': form, 'title':'Create Customer'})
+
+@login_required
+@admin_required
+def customer_edit(request, pk):
+    obj = get_object_or_404(Customer, pk=pk)
+    form = CustomerForm(request.POST or None, instance=obj)
+    if request.method == 'POST' and form.is_valid():
+        form.save(); return redirect('customer_list')
+    return render(request, 'customers/form.html', {'form': form, 'title':'Edit Customer'})
