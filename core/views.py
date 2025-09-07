@@ -110,3 +110,8 @@ def supplier_delete(request, pk):
     if request.method == 'POST':
         obj.delete(); return redirect('supplier_list')
     return render(request, 'confirm_delete.html', {'obj': obj, 'cancel_url':'supplier_list'})
+
+# Customers
+@login_required
+def customer_list(request):
+    return render(request, 'customers/list.html', {'customers': Customer.objects.all()})
