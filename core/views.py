@@ -92,3 +92,12 @@ def supplier_create(request):
     if request.method == 'POST' and form.is_valid():
         form.save(); return redirect('supplier_list')
     return render(request, 'suppliers/form.html', {'form': form, 'title':'Create Supplier'})
+
+@login_required
+@admin_required
+def supplier_edit(request, pk):
+    obj = get_object_or_404(Supplier, pk=pk)
+    form = SupplierForm(request.POST or None, instance=obj)
+    if request.method == 'POST' and form.is_valid():
+        form.save(); return redirect('supplier_list')
+    return render(request, 'suppliers/form.html', {'form': form, 'title':'Edit Supplier'})
