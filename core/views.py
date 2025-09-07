@@ -140,3 +140,9 @@ def customer_delete(request, pk):
     if request.method == 'POST':
         obj.delete(); return redirect('customer_list')
     return render(request, 'confirm_delete.html', {'obj': obj, 'cancel_url':'customer_list'})
+
+
+# Stock In
+@login_required
+def stockin_list(request):
+    return render(request, 'stockin/list.html', {'items': StockIn.objects.select_related('product','supplier').order_by('-id')})
