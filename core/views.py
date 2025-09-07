@@ -101,3 +101,12 @@ def supplier_edit(request, pk):
     if request.method == 'POST' and form.is_valid():
         form.save(); return redirect('supplier_list')
     return render(request, 'suppliers/form.html', {'form': form, 'title':'Edit Supplier'})
+
+
+@login_required
+@admin_required
+def supplier_delete(request, pk):
+    obj = get_object_or_404(Supplier, pk=pk)
+    if request.method == 'POST':
+        obj.delete(); return redirect('supplier_list')
+    return render(request, 'confirm_delete.html', {'obj': obj, 'cancel_url':'supplier_list'})
