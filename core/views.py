@@ -84,3 +84,11 @@ def product_delete(request, pk):
 @login_required
 def supplier_list(request):
     return render(request, 'suppliers/list.html', {'suppliers': Supplier.objects.all()})
+
+@login_required
+@admin_required
+def supplier_create(request):
+    form = SupplierForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save(); return redirect('supplier_list')
+    return render(request, 'suppliers/form.html', {'form': form, 'title':'Create Supplier'})
