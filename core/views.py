@@ -146,3 +146,10 @@ def customer_delete(request, pk):
 @login_required
 def stockin_list(request):
     return render(request, 'stockin/list.html', {'items': StockIn.objects.select_related('product','supplier').order_by('-id')})
+
+@login_required
+def stockin_create(request):
+    form = StockInForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save(); return redirect('stockin_list')
+    return render(request, 'stockin/form.html', {'form': form, 'title':'Stock In'})
