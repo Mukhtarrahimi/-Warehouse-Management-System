@@ -79,3 +79,8 @@ def product_delete(request, pk):
         obj.delete()
         return redirect('product_list')
     return render(request, 'confirm_delete.html', {'obj': obj, 'cancel_url':'product_list'})
+
+# Suppliers
+@login_required
+def supplier_list(request):
+    return render(request, 'suppliers/list.html', {'suppliers': Supplier.objects.all()})
