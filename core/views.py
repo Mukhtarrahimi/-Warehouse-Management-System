@@ -168,3 +168,13 @@ def stockout_create(request):
         except Exception as e:
             form.add_error(None, str(e))
     return render(request, 'stockout/form.html', {'form': form, 'title':'Stock Out'})
+
+# Reports
+@login_required
+def reports_dashboard(request):
+    from django.db.models.functions import Coalesce
+    inv_value = Product.objects.aggregate(
+        value=Coalesce(Sum(F('stock')*F('avg_cost'), output_field=DecimalField(max_digits=12, decimal_places=2)), 0)
+    )['value']
+    low_stock = Product.objects.filter(stock__lte=F('low_stock_threshold'))
+    return render(request, 'reports/dashboard.html', {'inv_value': inv_value, 'low_stock': low_stock})
