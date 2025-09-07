@@ -158,3 +158,13 @@ def stockin_create(request):
 @login_required
 def stockout_list(request):
     return render(request, 'stockout/list.html', {'items': StockOut.objects.select_related('product','customer').order_by('-id')})
+
+@login_required
+def stockout_create(request):
+    form = StockOutForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        try:
+            form.save(); return redirect('stockout_list')
+        except Exception as e:
+            form.add_error(None, str(e))
+    return render(request, 'stockout/form.html', {'form': form, 'title':'Stock Out'})
