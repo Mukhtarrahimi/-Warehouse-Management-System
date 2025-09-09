@@ -179,7 +179,7 @@ def reports_dashboard(request):
     low_stock = Product.objects.filter(stock__lte=F('low_stock_threshold'))
     return render(request, 'reports/dashboard.html', {'inv_value': inv_value, 'low_stock': low_stock})
 
-
+# profit-report
 @login_required
 def profit_report(request):
     start = request.GET.get('start')
