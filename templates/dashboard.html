@@ -3,6 +3,21 @@
 {% block content %}
 <h1 class="text-2xl font-bold mb-4">Dashboard</h1>
 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-  
+  <div class="bg-white p-4 rounded shadow">
+    <div class="text-gray-500 text-sm">Total Products</div>
+    <div class="text-2xl font-semibold">{{ total_products }}</div>
+  </div>
+  <div class="bg-white p-4 rounded shadow">
+    <div class="text-gray-500 text-sm">Total Stock Units</div>
+    <div class="text-2xl font-semibold">{{ total_stock }}</div>
+  </div>
+  <div class="bg-white p-4 rounded shadow">
+    <div class="text-gray-500 text-sm">Low Stock Items</div>
+    <div class="text-2xl font-semibold">{{ low_stock }}</div>
+  </div>
+  <div class="bg-white p-4 rounded shadow">
+    <div class="text-gray-500 text-sm">Today's Revenue / Profit</div>
+    <div class="text-xl font-semibold">{{ today_revenue }} / {{ today_profit }}</div>
+  </div>
 </div>
 {% endblock %}
