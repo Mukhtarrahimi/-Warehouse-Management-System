@@ -21,7 +21,24 @@
         <th class="text-left p-2"></th>
       </tr>
     </thead>
-    
+    <tbody>
+      {% for p in products %}
+      <tr class="border-t">
+        <td class="p-2">{{ p.name }}</td>
+        <td class="p-2">{{ p.code }}</td>
+        <td class="p-2">{{ p.category }}</td>
+        <td class="p-2">{{ p.stock }}</td>
+        <td class="p-2">{{ p.avg_cost }}</td>
+        <td class="p-2">{{ p.sale_price }}</td>
+        <td class="p-2">
+          <a class="text-blue-600" href="{% url 'product_edit' p.id %}">Edit</a>
+          <a class="text-red-600 ml-2" href="{% url 'product_delete' p.id %}">Delete</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td class="p-2" colspan="7">No products</td></tr>
+      {% endfor %}
+    </tbody>
   </table>
 </div>
 {% endblock %}
