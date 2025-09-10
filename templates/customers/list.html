@@ -10,7 +10,21 @@
     <thead class="bg-gray-50">
       <tr><th class="text-left p-2">Name</th><th class="text-left p-2">Phone</th><th class="text-left p-2">Address</th><th class="p-2"></th></tr>
     </thead>
-    
+    <tbody>
+      {% for c in customers %}
+      <tr class="border-t">
+        <td class="p-2">{{ c.name }}</td>
+        <td class="p-2">{{ c.phone }}</td>
+        <td class="p-2">{{ c.address|default:'-' }}</td>
+        <td class="p-2">
+          <a class="text-blue-600" href="{% url 'customer_edit' c.id %}">Edit</a>
+          <a class="text-red-600 ml-2" href="{% url 'customer_delete' c.id %}">Delete</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td class="p-2" colspan="4">No customers</td></tr>
+      {% endfor %}
+    </tbody>
   </table>
 </div>
 {% endblock %}
