@@ -1,0 +1,11 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="flex justify-between mb-3">
+  <h1 class="text-2xl font-bold">Customers</h1>
+  <a href="{% url 'customer_create' %}" class="bg-blue-600 text-white px-3 py-1 rounded">New</a>
+</div>
+<div class="bg-white rounded shadow overflow-x-auto">
+  
+</div>
+{% endblock %}
