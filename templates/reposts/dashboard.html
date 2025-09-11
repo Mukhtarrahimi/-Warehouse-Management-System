@@ -10,6 +10,16 @@
   <div class="bg-white p-4 rounded shadow">
     <div class="text-lg font-semibold mb-2">Low Stock</div>
     <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+        <thead class="bg-gray-50"><tr><th class="text-left p-2">Product</th><th class="text-left p-2">Stock</th><th class="text-left p-2">Threshold</th></tr></thead>
+        <tbody>
+          {% for p in low_stock %}
+          <tr class="border-t"><td class="p-2">{{ p }}</td><td class="p-2">{{ p.stock }}</td><td class="p-2">{{ p.low_stock_threshold }}</td></tr>
+          {% empty %}
+          <tr><td class="p-2" colspan="3">No low stock items</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
       
     </div>
   </div>
