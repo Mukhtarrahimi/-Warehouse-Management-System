@@ -13,5 +13,15 @@
   </div>
   <button class="bg-blue-600 text-white px-3 py-2 rounded">Filter</button>
 </form>
+<div class="bg-white p-4 rounded shadow mb-4">
+  <div>Total Revenue: <strong>{{ total_revenue }}</strong></div>
+  <div>Total Profit: <strong>{{ total_profit }}</strong></div>
+</div>
+<div class="bg-white rounded shadow overflow-x-auto">
+  <table class="min-w-full text-sm">
+    <thead class="bg-gray-50"><tr><th class="text-left p-2">Date</th><th class="text-left p-2">Product</th><th class="text-left p-2">Qty</th><th class="text-left p-2">Unit Price</th><th class="text-left p-2">Cost Basis</th><th class="text-left p-2">Profit</th></tr></thead>
+    
+  </table>
+</div>
 
 {% endblock %}
