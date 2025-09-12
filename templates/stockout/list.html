@@ -6,6 +6,23 @@
   <a href="{% url 'stockout_create' %}" class="bg-blue-600 text-white px-3 py-1 rounded">Add</a>
 </div>
 <div class="bg-white rounded shadow overflow-x-auto">
-  
+  <table class="min-w-full text-sm">
+    <thead class="bg-gray-50"><tr><th class="text-left p-2">Product</th><th class="text-left p-2">Customer</th><th class="text-left p-2">Qty</th><th class="text-left p-2">Unit Price</th><th class="text-left p-2">Cost Basis</th><th class="text-left p-2">Profit</th><th class="text-left p-2">Date</th></tr></thead>
+    <tbody>
+      {% for x in items %}
+      <tr class="border-t">
+        <td class="p-2">{{ x.product }}</td>
+        <td class="p-2">{{ x.customer|default:'-' }}</td>
+        <td class="p-2">{{ x.quantity }}</td>
+        <td class="p-2">{{ x.unit_price }}</td>
+        <td class="p-2">{{ x.cost_basis }}</td>
+        <td class="p-2">{{ x.profit }}</td>
+        <td class="p-2">{{ x.date }}</td>
+      </tr>
+      {% empty %}
+      <tr><td class="p-2" colspan="7">No entries</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}
