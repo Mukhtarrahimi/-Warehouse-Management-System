@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-xl bg-white p-6 rounded shadow">
+  <h1 class="text-xl font-semibold mb-4">{{ title }}</h1>
+  <form method="post" class="space-y-3">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if form.non_field_errors %}
+      <div class="text-red-600 text-sm">{{ form.non_field_errors }}</div>
+    {% endif %}
+    <button class="bg-blue-600 text-white px-3 py-1 rounded">Save</button>
+  </form>
+</div>
+{% endblock %}
