@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
+  <h1 class="text-xl font-semibold mb-4">Login</h1>
+  <form method="post" class="space-y-4">
+    {% csrf_token %}
+    <div>
+      <label class="block text-sm">Username</label>
+      <input type="text" name="username" class="w-full border rounded p-2" required>
+    </div>
+    <div>
+      <label class="block text-sm">Password</label>
+      <input type="password" name="password" class="w-full border rounded p-2" required>
+    </div>
+    {% if form.non_field_errors %}
+      <div class="text-red-600 text-sm">{{ form.non_field_errors }}</div>
+    {% endif %}
+    <button class="w-full bg-blue-600 text-white rounded p-2">Sign in</button>
+  </form>
+</div>
+{% endblock %}

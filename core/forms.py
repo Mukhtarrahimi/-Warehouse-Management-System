@@ -1,3 +1,4 @@
+
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Product, Supplier, Customer, StockIn, StockOut
@@ -20,7 +21,7 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ['name','phone','address']
-    
+
 class StockInForm(forms.ModelForm):
     class Meta:
         model = StockIn

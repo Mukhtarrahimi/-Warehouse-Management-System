@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -6,7 +7,7 @@ from django.utils import timezone
 from .models import Product, Supplier, Customer, StockIn, StockOut
 from .forms import LoginForm, ProductForm, SupplierForm, CustomerForm, StockInForm, StockOutForm
 from .permissions import admin_required
-# loign
+
 def login_view(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
@@ -39,7 +40,6 @@ def dashboard(request):
         'today_profit': today_sales.get('profit') or 0,
     }
     return render(request, 'dashboard.html', context)
-
 
 # Products
 @login_required
@@ -102,7 +102,6 @@ def supplier_edit(request, pk):
         form.save(); return redirect('supplier_list')
     return render(request, 'suppliers/form.html', {'form': form, 'title':'Edit Supplier'})
 
-
 @login_required
 @admin_required
 def supplier_delete(request, pk):
@@ -141,7 +140,6 @@ def customer_delete(request, pk):
         obj.delete(); return redirect('customer_list')
     return render(request, 'confirm_delete.html', {'obj': obj, 'cancel_url':'customer_list'})
 
-
 # Stock In
 @login_required
 def stockin_list(request):
@@ -179,7 +177,6 @@ def reports_dashboard(request):
     low_stock = Product.objects.filter(stock__lte=F('low_stock_threshold'))
     return render(request, 'reports/dashboard.html', {'inv_value': inv_value, 'low_stock': low_stock})
 
-# profit-report
 @login_required
 def profit_report(request):
     start = request.GET.get('start')

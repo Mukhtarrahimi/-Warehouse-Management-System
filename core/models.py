@@ -1,3 +1,4 @@
+
 from django.db import models, transaction
 from django.contrib.auth.models import AbstractUser
 
@@ -20,7 +21,6 @@ class Customer(models.Model):
     address = models.TextField(blank=True)
     def __str__(self):
         return self.name
-    
 
 class Product(models.Model):
     name = models.CharField(max_length=120)
@@ -33,7 +33,7 @@ class Product(models.Model):
     low_stock_threshold = models.IntegerField(default=5)
     def __str__(self):
         return f"{self.name} ({self.code})"
-    
+
 class StockIn(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='stockins')
     supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, null=True, blank=True)

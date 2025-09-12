@@ -1,0 +1,39 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Profit Report</h1>
+<form method="get" class="flex gap-2 mb-4 items-end">
+  <div>
+    <label class="block text-sm">Start</label>
+    <input class="border rounded p-2" type="date" name="start" value="{{ start|default:'' }}">
+  </div>
+  <div>
+    <label class="block text-sm">End</label>
+    <input class="border rounded p-2" type="date" name="end" value="{{ end|default:'' }}">
+  </div>
+  <button class="bg-blue-600 text-white px-3 py-2 rounded">Filter</button>
+</form>
+<div class="bg-white p-4 rounded shadow mb-4">
+  <div>Total Revenue: <strong>{{ total_revenue }}</strong></div>
+  <div>Total Profit: <strong>{{ total_profit }}</strong></div>
+</div>
+<div class="bg-white rounded shadow overflow-x-auto">
+  <table class="min-w-full text-sm">
+    <thead class="bg-gray-50"><tr><th class="text-left p-2">Date</th><th class="text-left p-2">Product</th><th class="text-left p-2">Qty</th><th class="text-left p-2">Unit Price</th><th class="text-left p-2">Cost Basis</th><th class="text-left p-2">Profit</th></tr></thead>
+    <tbody>
+      {% for x in items %}
+      <tr class="border-t">
+        <td class="p-2">{{ x.date }}</td>
+        <td class="p-2">{{ x.product }}</td>
+        <td class="p-2">{{ x.quantity }}</td>
+        <td class="p-2">{{ x.unit_price }}</td>
+        <td class="p-2">{{ x.cost_basis }}</td>
+        <td class="p-2">{{ x.profit }}</td>
+      </tr>
+      {% empty %}
+      <tr><td class="p-2" colspan="6">No data</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
